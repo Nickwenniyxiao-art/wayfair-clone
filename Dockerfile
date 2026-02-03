@@ -3,8 +3,15 @@ FROM node:22-alpine AS builder
 
 WORKDIR /app
 
-# Copy package files and patches
-COPY package.json pnpm-lock.yaml patches ./
+# Copy package files first
+COPY package.json pnpm-lock.yaml ./
+
+# Create patches directory and copy patch files
+RUN mkdir -p patches
+COPY patches/ patches/
+
+# Debug: List files to verify patches folder
+RUN echo "=== Listing /app contents ===" && ls -la /app && echo "=== Listing /app/patches contents ===" && ls -la /app/patches || echo "patches folder not found!"
 
 # Install dependencies
 RUN npm install -g pnpm && pnpm install --frozen-lockfile
@@ -23,8 +30,15 @@ WORKDIR /app
 # Install pnpm
 RUN npm install -g pnpm
 
-# Copy package files and patches
-COPY package.json pnpm-lock.yaml patches ./
+# Copy package files first
+COPY package.json pnpm-lock.yaml ./
+
+# Create patches directory and copy patch files
+RUN mkdir -p patches
+COPY patches/ patches/
+
+# Debug: List files to verify patches folder
+RUN echo "=== Listing /app contents (production) ===" && ls -la /app && echo "=== Listing /app/patches contents (production) ===" && ls -la /app/patches || echo "patches folder not found!"
 
 # Install production dependencies only
 RUN pnpm install --prod --frozen-lockfile
