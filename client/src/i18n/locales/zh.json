@@ -16,22 +16,18 @@
     "faq": "常见问题"
   },
   "home": {
-    "title": "欢迎来到 Wayfair 克隆版",
+    "welcome": "欢迎来到 Wayfair 克隆版",
     "subtitle": "发现数百万家居用品和装饰品。立即购物，改造您的空间。",
     "shopNow": "立即购物",
+    "signIn": "登录",
     "shopByCategory": "按分类购物",
     "featuredProducts": "精选商品",
-    "viewAll": "查看全部",
-    "limitedTimeOffer": "限时优惠",
-    "offerDescription": "本周所有家具商品享受 20% 折扣！",
-    "shopSale": "购物优惠",
-    "trustSection": "为什么选择我们",
-    "productsAvailable": "可用商品",
-    "customerSupport": "客户支持",
-    "satisfactionGuaranteed": "满意度保证",
-    "joinCommunity": "加入我们的社区",
-    "joinDescription": "创建账户以保存您的收藏夹并跟踪订单",
-    "getStarted": "开始使用"
+    "feature1Title": "品种齐全",
+    "feature1Desc": "浏览数百万家居用品和装饰品",
+    "feature2Title": "快速配送",
+    "feature2Desc": "快速可靠的送货上门服务",
+    "feature3Title": "最佳价格",
+    "feature3Desc": "有竞争力的价格和定期折扣"
   },
   "products": {
     "title": "购物商品",

@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { trpc } from "@/lib/trpc";
 import { Link } from "wouter";
 import { ShoppingCart, Star, Zap } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import { useState, useEffect } from "react";
 
 export default function Home() {
   const { user, isAuthenticated } = useAuth();
+  const { t } = useTranslation();
   const [featuredProducts, setFeaturedProducts] = useState<any[]>([]);
   const [categories, setCategories] = useState<any[]>([]);
 
@@ -30,22 +32,21 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="max-w-2xl">
             <h1 className="text-5xl font-bold mb-4">
-              Welcome to Wayfair Clone
+              {t("home.welcome")}
             </h1>
             <p className="text-xl text-blue-100 mb-8">
-              Discover millions of home furnishings and décor items. Shop now and
-              transform your space.
+              {t("home.subtitle")}
             </p>
             <div className="flex gap-4">
               <Link href="/products">
                 <Button size="lg" className="bg-white text-blue-600 hover:bg-blue-50">
-                  Shop Now
+                  {t("home.shopNow")}
                 </Button>
               </Link>
               {!isAuthenticated && (
                 <Link href="/auth/login">
                   <Button size="lg" variant="outline" className="border-white text-white hover:bg-blue-700">
-                    Sign In
+                    {t("home.signIn")}
                   </Button>
                 </Link>
               )}
@@ -54,18 +55,17 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Categories Section */}
-      <section className="py-16 bg-white">
+      {/* Shop by Category */}
+      <section className="py-16">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-8 text-center">Shop by Category</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {categories.map((category) => (
-              <Link key={category.id} href={`/products?category=${category.id}`}>
-                <Card className="p-6 text-center hover:shadow-lg transition-shadow cursor-pointer">
-                  {category.icon && (
-                    <div className="text-4xl mb-3 text-center">{category.icon}</div>
-                  )}
-                  <h3 className="font-semibold text-sm">{category.name}</h3>
+          <h2 className="text-3xl font-bold text-center mb-12">
+            {t("home.shopByCategory")}
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {categories.map((cat) => (
+              <Link key={cat.id} href={`/products?category=${cat.slug}`}>
+                <Card className="p-8 text-center hover:shadow-lg transition cursor-pointer">
+                  <h3 className="text-xl font-semibold">{cat.name}</h3>
                 </Card>
               </Link>
             ))}
@@ -73,177 +73,90 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Featured Products Section */}
-      <section className="py-16 bg-slate-50">
+      {/* Featured Products */}
+      {featuredProducts.length > 0 && (
+        <section className="py-16 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <h2 className="text-3xl font-bold text-center mb-12">
+              {t("home.featuredProducts")}
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {featuredProducts.slice(0, 8).map((product) => (
+                <Link key={product.id} href={`/products/${product.id}`}>
+                  <Card className="overflow-hidden hover:shadow-lg transition cursor-pointer">
+                    <div className="aspect-square bg-gray-200 overflow-hidden">
+                      {product.images && product.images[0] && (
+                        <img
+                          src={product.images[0]}
+                          alt={product.name}
+                          className="w-full h-full object-cover hover:scale-105 transition"
+                        />
+                      )}
+                    </div>
+                    <div className="p-4">
+                      <h3 className="font-semibold text-sm mb-2 line-clamp-2">
+                        {product.name}
+                      </h3>
+                      <div className="flex items-center justify-between">
+                        <span className="text-lg font-bold text-blue-600">
+                          ${product.price}
+                        </span>
+                        <div className="flex items-center gap-1">
+                          <Star size={16} className="fill-yellow-400 text-yellow-400" />
+                          <span className="text-sm text-gray-600">
+                            {product.rating}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </Card>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Features Section */}
+      <section className="py-16">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-3xl font-bold">Featured Products</h2>
-            <Link href="/products">
-              <Button variant="outline">View All</Button>
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {featuredProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Promotional Banner */}
-      <section className="py-16 bg-gradient-to-r from-orange-500 to-red-600 text-white">
-        <div className="container mx-auto px-4 text-center">
-          <Zap className="w-12 h-12 mx-auto mb-4" />
-          <h2 className="text-3xl font-bold mb-4">Limited Time Offer</h2>
-          <p className="text-lg mb-6">Get 20% off on all furniture items this week!</p>
-          <Button size="lg" className="bg-white text-red-600 hover:bg-slate-100">
-            Shop Sale
-          </Button>
-        </div>
-      </section>
-
-      {/* Trust Section */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <div>
-              <div className="text-4xl font-bold text-blue-600 mb-2">10M+</div>
-              <p className="text-gray-600">Products Available</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="text-center">
+              <div className="flex justify-center mb-4">
+                <ShoppingCart size={40} className="text-blue-600" />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">
+                {t("home.feature1Title")}
+              </h3>
+              <p className="text-gray-600">
+                {t("home.feature1Desc")}
+              </p>
             </div>
-            <div>
-              <div className="text-4xl font-bold text-blue-600 mb-2">24/7</div>
-              <p className="text-gray-600">Customer Support</p>
+            <div className="text-center">
+              <div className="flex justify-center mb-4">
+                <Zap size={40} className="text-blue-600" />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">
+                {t("home.feature2Title")}
+              </h3>
+              <p className="text-gray-600">
+                {t("home.feature2Desc")}
+              </p>
             </div>
-            <div>
-              <div className="text-4xl font-bold text-blue-600 mb-2">100%</div>
-              <p className="text-gray-600">Satisfaction Guaranteed</p>
+            <div className="text-center">
+              <div className="flex justify-center mb-4">
+                <Star size={40} className="text-blue-600" />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">
+                {t("home.feature3Title")}
+              </h3>
+              <p className="text-gray-600">
+                {t("home.feature3Desc")}
+              </p>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16 bg-slate-900 text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-4">
-            {isAuthenticated
-              ? `Welcome back, ${user?.name}!`
-              : "Join Our Community"}
-          </h2>
-          <p className="text-lg text-slate-300 mb-6">
-            {isAuthenticated
-              ? "Continue shopping and manage your orders"
-              : "Create an account to save your favorites and track orders"}
-          </p>
-          {!isAuthenticated && (
-            <Link href="/auth/login">
-              <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
-                Get Started
-              </Button>
-            </Link>
-          )}
         </div>
       </section>
     </div>
-  );
-}
-
-/**
- * Product Card Component
- */
-function ProductCard({ product }: { product: any }) {
-  const addToCartMutation = trpc.cart.add.useMutation();
-  const [quantity, setQuantity] = useState(1);
-
-  const handleAddToCart = async () => {
-    try {
-      await addToCartMutation.mutateAsync({
-        productId: product.id,
-        quantity,
-      });
-      // Show success toast
-      alert("Added to cart!");
-    } catch (error) {
-      alert("Failed to add to cart");
-    }
-  };
-
-  const images = Array.isArray(product.images) ? product.images : [];
-  const imageUrl = images.length > 0 ? images[0] : "/placeholder-product.jpg";
-
-  return (
-    <Card className="overflow-hidden hover:shadow-lg transition-shadow">
-      {/* Product Image */}
-      <Link href={`/product/${product.id}`}>
-        <div className="relative bg-slate-200 h-48 overflow-hidden cursor-pointer">
-          <img
-            src={imageUrl}
-            alt={product.name}
-            className="w-full h-full object-cover hover:scale-105 transition-transform"
-          />
-          {product.isFeatured && (
-            <div className="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded text-xs font-semibold">
-              Featured
-            </div>
-          )}
-        </div>
-      </Link>
-
-      {/* Product Info */}
-      <div className="p-4">
-        <Link href={`/product/${product.id}`}>
-          <h3 className="font-semibold text-sm line-clamp-2 hover:text-blue-600 cursor-pointer">
-            {product.name}
-          </h3>
-        </Link>
-
-        {/* Rating */}
-        <div className="flex items-center gap-1 my-2">
-          <div className="flex text-yellow-400">
-            {[...Array(5)].map((_, i) => (
-              <Star
-                key={i}
-                size={14}
-                className={i < Math.floor(product.rating || 0) ? "fill-current" : ""}
-              />
-            ))}
-          </div>
-          <span className="text-xs text-gray-500">({product.reviewCount})</span>
-        </div>
-
-        {/* Price */}
-        <div className="flex items-baseline gap-2 mb-3">
-          <span className="text-lg font-bold text-blue-600">
-            ${Number(product.price).toFixed(2)}
-          </span>
-          {product.originalPrice && (
-            <span className="text-sm text-gray-500 line-through">
-              ${Number(product.originalPrice).toFixed(2)}
-            </span>
-          )}
-        </div>
-
-        {/* Stock Status */}
-        <div className="text-xs mb-3">
-          {product.stock > 0 ? (
-            <span className="text-green-600 font-semibold">In Stock</span>
-          ) : (
-            <span className="text-red-600 font-semibold">Out of Stock</span>
-          )}
-        </div>
-
-        {/* Add to Cart Button */}
-        <Button
-          onClick={handleAddToCart}
-          disabled={product.stock === 0 || addToCartMutation.isPending}
-          className="w-full"
-          size="sm"
-        >
-          <ShoppingCart size={16} className="mr-2" />
-          {addToCartMutation.isPending ? "Adding..." : "Add to Cart"}
-        </Button>
-      </div>
-    </Card>
   );
 }

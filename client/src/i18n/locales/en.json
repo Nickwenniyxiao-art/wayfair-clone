@@ -16,22 +16,18 @@
     "faq": "FAQ"
   },
   "home": {
-    "title": "Welcome to Wayfair Clone",
+    "welcome": "Welcome to Wayfair Clone",
     "subtitle": "Discover millions of home furnishings and décor items. Shop now and transform your space.",
     "shopNow": "Shop Now",
+    "signIn": "Sign In",
     "shopByCategory": "Shop by Category",
     "featuredProducts": "Featured Products",
-    "viewAll": "View All",
-    "limitedTimeOffer": "Limited Time Offer",
-    "offerDescription": "Get 20% off on all furniture items this week!",
-    "shopSale": "Shop Sale",
-    "trustSection": "Why Choose Us",
-    "productsAvailable": "Products Available",
-    "customerSupport": "Customer Support",
-    "satisfactionGuaranteed": "Satisfaction Guaranteed",
-    "joinCommunity": "Join Our Community",
-    "joinDescription": "Create an account to save your favorites and track orders",
-    "getStarted": "Get Started"
+    "feature1Title": "Wide Selection",
+    "feature1Desc": "Browse through millions of home furnishings and décor items",
+    "feature2Title": "Fast Shipping",
+    "feature2Desc": "Quick and reliable delivery to your doorstep",
+    "feature3Title": "Best Prices",
+    "feature3Desc": "Competitive prices and regular discounts"
   },
   "products": {
     "title": "Shop Products",
