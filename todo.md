@@ -349,3 +349,41 @@
 - [x] Translate table headers and buttons
 - [x] Translate form fields and validation messages
 - [x] Translate chart labels and legends
+
+## Phase 12: Create 200 Nordic Minimalist Products
+
+### Product Data Generation
+- [ ] Design product catalog structure (categories, subcategories)
+- [ ] Generate 200 complete product entries with Nordic minimalist style
+- [ ] Source high-quality product images from Unsplash CDN
+- [ ] Create bilingual product names and descriptions (English/Chinese)
+- [ ] Set realistic pricing ($39.99 - $1,999.99)
+- [ ] Assign appropriate stock levels (5-100 units)
+- [ ] Add product ratings and review counts
+
+### Data Import
+- [ ] Create data import script for bulk product insertion
+- [ ] Import categories into Digital Ocean MySQL
+- [ ] Import all 200 products into database
+- [ ] Verify data integrity and relationships
+- [ ] Test product display on website
+
+### Product Distribution
+- [ ] Furniture category: ~80 products (sofas, tables, chairs, beds, storage)
+- [ ] Decor category: ~70 products (wall art, vases, rugs, mirrors, accessories)
+- [ ] Lighting category: ~50 products (pendant lights, floor lamps, table lamps, wall sconces)
+
+## Phase 13: Download Unsplash Images and Upload to S3
+
+### Image Download
+- [x] Download 80 furniture product images from Unsplash
+- [x] Download 70 decor product images from Unsplash
+- [x] Download 50 lighting product images from Unsplash
+- [x] Upload all downloaded images to S3 storage
+- [x] Collect S3 CDN URLs for all uploaded images
+
+### Product Data with S3 Images
+- [x] Create product generation script with S3 CDN URLs
+- [x] Fix database schema column naming (displayOrder vs display_order)
+- [x] Import 200 products with S3 images to database
+- [x] Verify all images load correctly on website
