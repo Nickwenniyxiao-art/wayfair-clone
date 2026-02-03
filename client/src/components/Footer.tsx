@@ -1,7 +1,10 @@
 import { Link } from "wouter";
 import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export default function Footer() {
+  const { t } = useTranslation();
+
   return (
     <footer className="bg-slate-900 text-white">
       <div className="container mx-auto px-4 py-12">
@@ -9,93 +12,100 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* About */}
           <div>
-            <h3 className="font-bold text-lg mb-4">About Wayfair Clone</h3>
+            <h3 className="font-bold text-lg mb-4">{t("footer.aboutWayfair")}</h3>
             <p className="text-sm text-gray-300">
-              Your one-stop shop for home furnishings and décor. Discover millions
-              of products from trusted sellers.
+              {t("footer.description")}
             </p>
           </div>
 
           {/* Shop */}
           <div>
-            <h3 className="font-bold text-lg mb-4">Shop</h3>
+            <h3 className="font-bold text-lg mb-4">{t("footer.shop")}</h3>
             <ul className="space-y-2 text-sm text-gray-300">
               <li>
                 <Link href="/products">
                   <button className="hover:text-white transition">
-                    All Products
+                    {t("footer.allProducts")}
                   </button>
                 </Link>
               </li>
               <li>
                 <button className="hover:text-white transition">
-                  Furniture
+                  {t("footer.furniture")}
                 </button>
-              </li>
-              <li>
-                <button className="hover:text-white transition">Decor</button>
               </li>
               <li>
                 <button className="hover:text-white transition">
-                  Lighting
+                  {t("footer.decor")}
                 </button>
               </li>
               <li>
-                <button className="hover:text-white transition">Sale</button>
+                <button className="hover:text-white transition">
+                  {t("footer.lighting")}
+                </button>
+              </li>
+              <li>
+                <button className="hover:text-white transition">
+                  {t("footer.sale")}
+                </button>
               </li>
             </ul>
           </div>
 
           {/* Customer Service */}
           <div>
-            <h3 className="font-bold text-lg mb-4">Customer Service</h3>
+            <h3 className="font-bold text-lg mb-4">{t("footer.customerService")}</h3>
             <ul className="space-y-2 text-sm text-gray-300">
               <li>
                 <button className="hover:text-white transition">
-                  Contact Us
+                  {t("footer.contactUs")}
                 </button>
               </li>
               <li>
                 <button className="hover:text-white transition">
-                  Shipping Info
+                  {t("footer.shippingInfo")}
                 </button>
               </li>
               <li>
                 <button className="hover:text-white transition">
-                  Returns
+                  {t("footer.returns")}
                 </button>
               </li>
               <li>
                 <button className="hover:text-white transition">
-                  Track Order
+                  {t("footer.trackOrder")}
                 </button>
               </li>
               <li>
-                <button className="hover:text-white transition">FAQ</button>
+                <button className="hover:text-white transition">
+                  {t("common.faq")}
+                </button>
               </li>
             </ul>
           </div>
 
           {/* Company */}
           <div>
-            <h3 className="font-bold text-lg mb-4">Company</h3>
+            <h3 className="font-bold text-lg mb-4">{t("footer.company")}</h3>
             <ul className="space-y-2 text-sm text-gray-300">
               <li>
                 <button className="hover:text-white transition">
-                  About Us
-                </button>
-              </li>
-              <li>
-                <button className="hover:text-white transition">Careers</button>
-              </li>
-              <li>
-                <button className="hover:text-white transition">
-                  Privacy Policy
+                  {t("footer.aboutUs")}
                 </button>
               </li>
               <li>
                 <button className="hover:text-white transition">
-                  Terms of Service
+                  {t("footer.careers")}
+                </button>
+              </li>
+              <li>
+                <button className="hover:text-white transition">
+                  {t("footer.privacyPolicy")}
+                </button>
+              </li>
+              <li>
+                <button className="hover:text-white transition">
+                  {t("footer.termsOfService")}
                 </button>
               </li>
             </ul>
@@ -109,7 +119,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center">
           {/* Copyright */}
           <p className="text-sm text-gray-400 mb-4 md:mb-0">
-            © 2024 Wayfair Clone. All rights reserved.
+            {t("footer.copyright")}
           </p>
 
           {/* Social Links */}
@@ -147,22 +157,22 @@ export default function Footer() {
 
         {/* Payment Methods */}
         <div className="mt-8 pt-8 border-t border-slate-700">
-          <p className="text-sm text-gray-400 mb-3">We Accept</p>
+          <p className="text-sm text-gray-400 mb-3">{t("footer.weAccept")}</p>
           <div className="flex gap-4 flex-wrap">
             <span className="text-xs bg-slate-800 px-3 py-1 rounded">
-              Visa
+              {t("footer.visa")}
             </span>
             <span className="text-xs bg-slate-800 px-3 py-1 rounded">
-              Mastercard
+              {t("footer.mastercard")}
             </span>
             <span className="text-xs bg-slate-800 px-3 py-1 rounded">
-              American Express
+              {t("footer.amex")}
             </span>
             <span className="text-xs bg-slate-800 px-3 py-1 rounded">
               PayPal
             </span>
             <span className="text-xs bg-slate-800 px-3 py-1 rounded">
-              Apple Pay
+              {t("footer.applePay")}
             </span>
           </div>
         </div>

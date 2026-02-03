@@ -311,3 +311,32 @@
 - Express + Node.js for backend
 - MySQL for database
 - Drizzle ORM for database management
+
+
+## Phase 10: Multi-language Support (i18n)
+
+### Language Infrastructure
+- [x] Set up i18n library (react-i18next)
+- [x] Create language context and provider
+- [x] Create translation files for Chinese and English
+- [x] Implement language switcher component
+- [x] Add language persistence to localStorage
+
+### Frontend Translation
+- [x] Translate all UI text to Chinese and English
+- [x] Translate product categories and descriptions
+- [x] Translate error messages and notifications
+- [x] Translate form labels and placeholders
+- [x] Translate navigation and menu items
+
+### Backend Translation
+- [ ] Add language support to API responses
+- [ ] Translate error messages
+- [ ] Support multi-language product descriptions
+- [ ] Translate email notifications
+
+### Admin Dashboard Translation
+- [x] Translate dashboard labels and metrics
+- [x] Translate table headers and buttons
+- [x] Translate form fields and validation messages
+- [x] Translate chart labels and legends

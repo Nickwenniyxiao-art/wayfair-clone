@@ -4,12 +4,15 @@ import { Link, useLocation } from "wouter";
 import { ShoppingCart, Search, User, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { getLoginUrl } from "@/const";
+import { useTranslation } from "react-i18next";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 export default function Header() {
   const { isAuthenticated, user, logout } = useAuth();
   const [location] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const { t } = useTranslation();
 
   const isActive = (path: string) => location === path;
 
@@ -44,6 +47,8 @@ export default function Header() {
 
           {/* Right Actions */}
           <div className="flex items-center gap-4">
+            {/* Language Switcher */}
+            <LanguageSwitcher />
             {/* Cart */}
             <Link href="/cart">
               <div className="relative cursor-pointer hover:text-blue-600 transition">
@@ -69,12 +74,12 @@ export default function Header() {
                   <div className="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg py-2">
                     <Link href="/account">
                       <button className="w-full text-left px-4 py-2 hover:bg-gray-100">
-                        My Account
+                        {t("admin.manageUsers")}
                       </button>
                     </Link>
                     <Link href="/orders">
                       <button className="w-full text-left px-4 py-2 hover:bg-gray-100">
-                        My Orders
+                        {t("admin.viewOrders")}
                       </button>
                     </Link>
                     <button
@@ -84,14 +89,14 @@ export default function Header() {
                       }}
                       className="w-full text-left px-4 py-2 hover:bg-gray-100 border-t"
                     >
-                      Sign Out
+                      {t("common.signOut")}
                     </button>
                   </div>
                 )}
               </div>
             ) : (
               <a href={getLoginUrl()}>
-                <Button size="sm">Sign In</Button>
+                <Button size="sm">{t("common.signIn")}</Button>
               </a>
             )}
 
@@ -115,20 +120,20 @@ export default function Header() {
                   : "hover:text-blue-600"
               }`}
             >
-              Shop All
+              {t("common.products")}
             </button>
           </Link>
           <button className="text-sm font-medium hover:text-blue-600 transition">
-            Furniture
+            {t("footer.furniture")}
           </button>
           <button className="text-sm font-medium hover:text-blue-600 transition">
-            Decor
+            {t("footer.decor")}
           </button>
           <button className="text-sm font-medium hover:text-blue-600 transition">
-            Lighting
+            {t("footer.lighting")}
           </button>
           <button className="text-sm font-medium hover:text-blue-600 transition">
-            Sale
+            {t("footer.sale")}
           </button>
         </nav>
 
@@ -137,20 +142,20 @@ export default function Header() {
           <div className="md:hidden border-t py-4 space-y-2">
             <Link href="/products">
               <button className="block w-full text-left px-4 py-2 hover:bg-gray-100 rounded">
-                Shop All
+                {t("common.products")}
               </button>
             </Link>
             <button className="block w-full text-left px-4 py-2 hover:bg-gray-100 rounded">
-              Furniture
+              {t("footer.furniture")}
             </button>
             <button className="block w-full text-left px-4 py-2 hover:bg-gray-100 rounded">
-              Decor
+              {t("footer.decor")}
             </button>
             <button className="block w-full text-left px-4 py-2 hover:bg-gray-100 rounded">
-              Lighting
+              {t("footer.lighting")}
             </button>
             <button className="block w-full text-left px-4 py-2 hover:bg-gray-100 rounded">
-              Sale
+              {t("footer.sale")}
             </button>
           </div>
         )}
