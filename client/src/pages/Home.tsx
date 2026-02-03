@@ -6,6 +6,7 @@ import { Link } from "wouter";
 import { ShoppingCart, Star, Zap } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useState, useEffect } from "react";
+import { getLoginUrl } from "@/const";
 
 export default function Home() {
   const { user, isAuthenticated } = useAuth();
@@ -44,7 +45,7 @@ export default function Home() {
                 </Button>
               </Link>
               {!isAuthenticated && (
-                <Link href="/auth/login">
+                <Link href={getLoginUrl()}>
                   <Button size="lg" variant="outline" className="border-white text-white hover:bg-blue-700">
                     {t("home.signIn")}
                   </Button>

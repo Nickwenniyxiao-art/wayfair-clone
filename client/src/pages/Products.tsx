@@ -14,8 +14,10 @@ import {
 import { Slider } from "@/components/ui/slider";
 import { Star, ShoppingCart, Search } from "lucide-react";
 import { Link } from "wouter";
+import { useTranslation } from "react-i18next";
 
 export default function Products() {
+  const { t } = useTranslation();
   const [location, setLocation] = useLocation();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
@@ -56,14 +58,14 @@ export default function Products() {
       {/* Header */}
       <div className="bg-white border-b">
         <div className="container mx-auto px-4 py-6">
-          <h1 className="text-3xl font-bold mb-4">Shop Products</h1>
+          <h1 className="text-3xl font-bold mb-4">{t("products.title")}</h1>
 
           {/* Search Bar */}
           <div className="flex gap-2">
             <div className="flex-1 relative">
               <Search className="absolute left-3 top-3 text-gray-400" size={20} />
               <Input
-                placeholder="Search products..."
+                placeholder={t("products.searchPlaceholder")}
                 value={searchQuery}
                 onChange={(e) => handleSearch(e.target.value)}
                 className="pl-10"
@@ -78,11 +80,11 @@ export default function Products() {
           {/* Sidebar Filters */}
           <div className="lg:col-span-1">
             <Card className="p-6 sticky top-4">
-              <h2 className="font-bold text-lg mb-4">Filters</h2>
+              <h2 className="font-bold text-lg mb-4">{t("products.filters")}</h2>
 
               {/* Category Filter */}
               <div className="mb-6">
-                <h3 className="font-semibold mb-3">Category</h3>
+                <h3 className="font-semibold mb-3">{t("products.category")}</h3>
                 <div className="space-y-2">
                   <button
                     onClick={() => handleCategoryChange(null)}
@@ -92,7 +94,7 @@ export default function Products() {
                         : "hover:bg-gray-100"
                     }`}
                   >
-                    All Categories
+                    {t("products.allCategories")}
                   </button>
                   {categories?.map((cat) => (
                     <button
@@ -112,7 +114,7 @@ export default function Products() {
 
               {/* Price Filter */}
               <div className="mb-6">
-                <h3 className="font-semibold mb-3">Price Range</h3>
+                <h3 className="font-semibold mb-3">{t("products.priceRange")}</h3>
                 <Slider
                   value={priceRange}
                   onValueChange={setPriceRange}
@@ -129,7 +131,7 @@ export default function Products() {
 
               {/* Rating Filter */}
               <div className="mb-6">
-                <h3 className="font-semibold mb-3">Rating</h3>
+                <h3 className="font-semibold mb-3">{t("products.rating")}</h3>
                 <div className="space-y-2">
                   {[5, 4, 3, 2, 1].map((rating) => (
                     <label key={rating} className="flex items-center gap-2 cursor-pointer">
@@ -162,7 +164,7 @@ export default function Products() {
                   setPage(1);
                 }}
               >
-                Clear Filters
+                {t("products.clearFilters")}
               </Button>
             </Card>
           </div>
@@ -172,18 +174,18 @@ export default function Products() {
             {/* Toolbar */}
             <div className="flex justify-between items-center mb-6">
               <p className="text-gray-600">
-                Showing {products?.length || 0} products
+                {t("products.showing")} {products?.length || 0} {t("products.title")}
               </p>
               <Select value={sortBy} onValueChange={setSortBy}>
                 <SelectTrigger className="w-48">
-                  <SelectValue placeholder="Sort by" />
+                  <SelectValue placeholder={t("products.sortBy")} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="newest">Newest</SelectItem>
-                  <SelectItem value="price-low">Price: Low to High</SelectItem>
-                  <SelectItem value="price-high">Price: High to Low</SelectItem>
-                  <SelectItem value="rating">Top Rated</SelectItem>
-                  <SelectItem value="popular">Most Popular</SelectItem>
+                  <SelectItem value="newest">{t("products.newest")}</SelectItem>
+                  <SelectItem value="price-low">{t("products.priceLowToHigh")}</SelectItem>
+                  <SelectItem value="price-high">{t("products.priceHighToLow")}</SelectItem>
+                  <SelectItem value="rating">{t("products.topRated")}</SelectItem>
+                  <SelectItem value="popular">{t("products.mostPopular")}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -208,25 +210,25 @@ export default function Products() {
                     onClick={() => setPage(Math.max(1, page - 1))}
                     disabled={page === 1}
                   >
-                    Previous
+                    {t("products.previous")}
                   </Button>
                   <Button variant="outline" disabled>
-                    Page {page}
+                    {t("products.showing")} {page}
                   </Button>
                   <Button
                     variant="outline"
                     onClick={() => setPage(page + 1)}
                     disabled={!products || products.length < 20}
                   >
-                    Next
+                    {t("products.next")}
                   </Button>
                 </div>
               </>
             ) : (
               <div className="text-center py-12">
-                <p className="text-gray-500 mb-4">No products found</p>
+                <p className="text-gray-500 mb-4">{t("products.noProducts")}</p>
                 <Button onClick={() => handleCategoryChange(null)}>
-                  Clear Filters
+                  {t("products.clearFilters")}
                 </Button>
               </div>
             )}
@@ -241,6 +243,7 @@ export default function Products() {
  * Product Card Component
  */
 function ProductCard({ product }: { product: any }) {
+  const { t } = useTranslation();
   const addToCartMutation = trpc.cart.add.useMutation();
 
   const handleAddToCart = async () => {
@@ -308,7 +311,7 @@ function ProductCard({ product }: { product: any }) {
           size="sm"
         >
           <ShoppingCart size={16} className="mr-2" />
-          {addToCartMutation.isPending ? "Adding..." : "Add to Cart"}
+          {addToCartMutation.isPending ? "Adding..." : t("products.addToCart")}
         </Button>
       </div>
     </Card>

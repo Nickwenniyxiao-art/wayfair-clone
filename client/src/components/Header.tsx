@@ -39,7 +39,7 @@ export default function Header() {
               <Search className="absolute left-3 top-3 text-gray-400" size={20} />
               <input
                 type="text"
-                placeholder="Search products..."
+                placeholder={t("products.searchPlaceholder")}
                 className="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
@@ -74,20 +74,17 @@ export default function Header() {
                   <div className="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg py-2">
                     <Link href="/account">
                       <button className="w-full text-left px-4 py-2 hover:bg-gray-100">
-                        {t("admin.manageUsers")}
+                        {t("common.account")}
                       </button>
                     </Link>
                     <Link href="/orders">
                       <button className="w-full text-left px-4 py-2 hover:bg-gray-100">
-                        {t("admin.viewOrders")}
+                        {t("admin.orderManagement")}
                       </button>
                     </Link>
                     <button
-                      onClick={() => {
-                        logout();
-                        setUserMenuOpen(false);
-                      }}
-                      className="w-full text-left px-4 py-2 hover:bg-gray-100 border-t"
+                      onClick={logout}
+                      className="w-full text-left px-4 py-2 hover:bg-gray-100 text-red-600"
                     >
                       {t("common.signOut")}
                     </button>
@@ -95,12 +92,14 @@ export default function Header() {
                 )}
               </div>
             ) : (
-              <a href={getLoginUrl()}>
-                <Button size="sm">{t("common.signIn")}</Button>
-              </a>
+              <Link href={getLoginUrl()}>
+                <Button size="sm" variant="outline">
+                  {t("common.signIn")}
+                </Button>
+              </Link>
             )}
 
-            {/* Mobile Menu Toggle */}
+            {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="md:hidden"
@@ -110,53 +109,57 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Navigation - Desktop */}
+        {/* Navigation Menu */}
         <nav className="hidden md:flex items-center gap-8 h-12 border-t">
           <Link href="/products">
-            <button
-              className={`text-sm font-medium transition ${
-                isActive("/products")
-                  ? "text-blue-600 border-b-2 border-blue-600"
-                  : "hover:text-blue-600"
+            <span
+              className={`cursor-pointer hover:text-blue-600 transition ${
+                isActive("/products") ? "text-blue-600 font-semibold" : ""
               }`}
             >
               {t("common.products")}
-            </button>
+            </span>
           </Link>
-          <button className="text-sm font-medium hover:text-blue-600 transition">
-            {t("footer.furniture")}
-          </button>
-          <button className="text-sm font-medium hover:text-blue-600 transition">
-            {t("footer.decor")}
-          </button>
-          <button className="text-sm font-medium hover:text-blue-600 transition">
-            {t("footer.lighting")}
-          </button>
-          <button className="text-sm font-medium hover:text-blue-600 transition">
-            {t("footer.sale")}
-          </button>
+          <Link href="/products?category=furniture">
+            <span className="cursor-pointer hover:text-blue-600 transition">
+              {t("footer.furniture")}
+            </span>
+          </Link>
+          <Link href="/products?category=decor">
+            <span className="cursor-pointer hover:text-blue-600 transition">
+              {t("footer.decor")}
+            </span>
+          </Link>
+          <Link href="/products?category=lighting">
+            <span className="cursor-pointer hover:text-blue-600 transition">
+              {t("footer.lighting")}
+            </span>
+          </Link>
         </nav>
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden border-t py-4 space-y-2">
+          <div className="md:hidden pb-4 border-t">
             <Link href="/products">
-              <button className="block w-full text-left px-4 py-2 hover:bg-gray-100 rounded">
+              <div className="py-2 px-4 hover:bg-gray-100 cursor-pointer">
                 {t("common.products")}
-              </button>
+              </div>
             </Link>
-            <button className="block w-full text-left px-4 py-2 hover:bg-gray-100 rounded">
-              {t("footer.furniture")}
-            </button>
-            <button className="block w-full text-left px-4 py-2 hover:bg-gray-100 rounded">
-              {t("footer.decor")}
-            </button>
-            <button className="block w-full text-left px-4 py-2 hover:bg-gray-100 rounded">
-              {t("footer.lighting")}
-            </button>
-            <button className="block w-full text-left px-4 py-2 hover:bg-gray-100 rounded">
-              {t("footer.sale")}
-            </button>
+            <Link href="/products?category=furniture">
+              <div className="py-2 px-4 hover:bg-gray-100 cursor-pointer">
+                {t("footer.furniture")}
+              </div>
+            </Link>
+            <Link href="/products?category=decor">
+              <div className="py-2 px-4 hover:bg-gray-100 cursor-pointer">
+                {t("footer.decor")}
+              </div>
+            </Link>
+            <Link href="/products?category=lighting">
+              <div className="py-2 px-4 hover:bg-gray-100 cursor-pointer">
+                {t("footer.lighting")}
+              </div>
+            </Link>
           </div>
         )}
       </div>
