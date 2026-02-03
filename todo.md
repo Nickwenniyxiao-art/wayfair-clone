@@ -89,7 +89,7 @@
 - [x] Implement category showcase
 - [x] Add promotional banners
 - [x] Create trending products section
-- [x] Initialize 22 Nordic minimalist style products
+- [x] Initialize 150 Nordic minimalist style products (Furniture, Decor, Lighting)
 
 ### Product Browsing
 - [x] Create product listing page
