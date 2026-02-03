@@ -78,7 +78,7 @@ export default function ProductDetail() {
     : product.specifications || {};
 
   return (
-    <div className="min-h-screen bg-white">
+    <div key={productId} className="min-h-screen bg-white">
       {/* Breadcrumb */}
       <div className="bg-gray-50 border-b">
         <div className="container mx-auto px-4 py-3">
