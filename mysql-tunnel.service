@@ -1,0 +1,15 @@
+[Unit]
+Description=SSH Tunnel to Digital Ocean MySQL
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+Environment="AUTOSSH_GATETIME=0"
+Environment="AUTOSSH_PORT=0"
+ExecStart=/usr/bin/autossh -M 0 -N -o "ServerAliveInterval=30" -o "ServerAliveCountMax=3" -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null" -i /home/ubuntu/do_mysql_key -L 3306:127.0.0.1:3306 root@165.232.54.128
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

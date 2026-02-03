@@ -395,3 +395,53 @@
 - [x] Verify product detail page loads correctly with product data
 - [x] Test image gallery on product detail page
 - [x] Ensure all product information displays correctly
+
+## Phase 15: Configure Auto-Reconnecting SSH Tunnel
+
+### SSH Tunnel Stability
+- [ ] Install autossh package
+- [ ] Create SSH tunnel monitoring script
+- [ ] Configure systemd service for automatic restart
+- [ ] Test tunnel reconnection after failure
+- [ ] Restart development server with stable tunnel
+- [ ] Verify all 200 products display correctly
+
+## Phase 16: Comprehensive Button and Feature Testing
+
+### Navigation Testing
+- [ ] Test logo click (return to home)
+- [ ] Test search bar functionality
+- [ ] Test language switcher
+- [ ] Test cart icon click
+- [ ] Test user profile dropdown
+- [ ] Test category navigation links
+
+### Product Listing Testing
+- [ ] Test category filter buttons
+- [ ] Test price range slider
+- [ ] Test rating filter checkboxes
+- [ ] Test sort dropdown
+- [ ] Test pagination buttons
+- [ ] Test "Add to Cart" buttons on product cards
+- [ ] Test product card click (navigate to detail)
+
+### Product Detail Testing
+- [ ] Test image gallery navigation
+- [ ] Test quantity selector (+/- buttons)
+- [ ] Test "Add to Cart" button
+- [ ] Test wishlist button
+- [ ] Test share button
+- [ ] Test breadcrumb navigation
+
+### Cart and Checkout Testing
+- [ ] Test cart page functionality
+- [ ] Test quantity update in cart
+- [ ] Test remove from cart
+- [ ] Test checkout button
+- [ ] Test coupon code input
+
+### User Account Testing
+- [ ] Test login/logout
+- [ ] Test account page navigation
+- [ ] Test order history
+- [ ] Test address management
