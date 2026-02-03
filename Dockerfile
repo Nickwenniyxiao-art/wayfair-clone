@@ -6,6 +6,9 @@ WORKDIR /app
 # Copy package files and patches
 COPY package.json pnpm-lock.yaml patches ./
 
+# Debug: List files to verify patches folder
+RUN echo "=== Listing /app contents ===" && ls -la /app && echo "=== Listing /app/patches contents ===" && ls -la /app/patches || echo "patches folder not found!"
+
 # Install dependencies
 RUN npm install -g pnpm && pnpm install --frozen-lockfile
 
@@ -25,6 +28,9 @@ RUN npm install -g pnpm
 
 # Copy package files and patches
 COPY package.json pnpm-lock.yaml patches ./
+
+# Debug: List files to verify patches folder
+RUN echo "=== Listing /app contents (production) ===" && ls -la /app && echo "=== Listing /app/patches contents (production) ===" && ls -la /app/patches || echo "patches folder not found!"
 
 # Install production dependencies only
 RUN pnpm install --prod --frozen-lockfile
