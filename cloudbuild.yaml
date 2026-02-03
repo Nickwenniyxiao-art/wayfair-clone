@@ -16,15 +16,6 @@ steps:
       - 'gcr.io/$PROJECT_ID/wayfair-clone:$SHORT_SHA'
 
   # Step 3: Deploy to Cloud Run
-  - name: 'gcr.io/cloud-builders/gke-deploy'
-    args:
-      - 'run'
-      - '--filename=.'
-      - '--image=gcr.io/$PROJECT_ID/wayfair-clone:$SHORT_SHA'
-      - '--location=us-central1'
-      - '--output=/workspace/output'
-
-  # Step 4: Deploy using gcloud
   - name: 'gcr.io/cloud-builders/gcloud'
     args:
       - 'run'
@@ -34,7 +25,10 @@ steps:
       - '--region=us-central1'
       - '--platform=managed'
       - '--allow-unauthenticated'
-      - '--set-env-vars=DATABASE_URL=$_DATABASE_URL,JWT_SECRET=$_JWT_SECRET,VITE_APP_ID=$_VITE_APP_ID,OAUTH_SERVER_URL=$_OAUTH_SERVER_URL'
+      - '--memory=2Gi'
+      - '--cpu=2'
+      - '--timeout=3600'
+      - '--set-env-vars=DATABASE_URL=$_DATABASE_URL,JWT_SECRET=$_JWT_SECRET,VITE_APP_ID=$_VITE_APP_ID,OAUTH_SERVER_URL=$_OAUTH_SERVER_URL,VITE_OAUTH_PORTAL_URL=$_VITE_OAUTH_PORTAL_URL,BUILT_IN_FORGE_API_URL=$_BUILT_IN_FORGE_API_URL,BUILT_IN_FORGE_API_KEY=$_BUILT_IN_FORGE_API_KEY'
 
 images:
   - 'gcr.io/$PROJECT_ID/wayfair-clone:$SHORT_SHA'
@@ -45,6 +39,9 @@ substitutions:
   _JWT_SECRET: ''
   _VITE_APP_ID: ''
   _OAUTH_SERVER_URL: ''
+  _VITE_OAUTH_PORTAL_URL: ''
+  _BUILT_IN_FORGE_API_URL: ''
+  _BUILT_IN_FORGE_API_KEY: ''
 
 options:
   machineType: 'N1_HIGHCPU_8'
