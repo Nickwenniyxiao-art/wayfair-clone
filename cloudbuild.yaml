@@ -28,20 +28,15 @@ steps:
       - '--memory=2Gi'
       - '--cpu=2'
       - '--timeout=3600'
-      - '--set-env-vars=DATABASE_URL=$_DATABASE_URL,JWT_SECRET=$_JWT_SECRET,VITE_APP_ID=$_VITE_APP_ID,OAUTH_SERVER_URL=$_OAUTH_SERVER_URL,VITE_OAUTH_PORTAL_URL=$_VITE_OAUTH_PORTAL_URL,BUILT_IN_FORGE_API_URL=$_BUILT_IN_FORGE_API_URL,BUILT_IN_FORGE_API_KEY=$_BUILT_IN_FORGE_API_KEY'
+      - '--set-env-vars=CUSTOM_DATABASE_URL=$_DATABASE_URL,NODE_ENV=production,JWT_SECRET=$_JWT_SECRET'
 
 images:
   - 'gcr.io/$PROJECT_ID/wayfair-clone:$SHORT_SHA'
   - 'gcr.io/$PROJECT_ID/wayfair-clone:latest'
 
 substitutions:
-  _DATABASE_URL: ''
-  _JWT_SECRET: ''
-  _VITE_APP_ID: ''
-  _OAUTH_SERVER_URL: ''
-  _VITE_OAUTH_PORTAL_URL: ''
-  _BUILT_IN_FORGE_API_URL: ''
-  _BUILT_IN_FORGE_API_KEY: ''
+  _DATABASE_URL: 'mysql://wayfair:Wayfair2024Secure!@165.232.54.128:3306/wayfair_clone'
+  _JWT_SECRET: 'your-jwt-secret-here-change-this'
 
 options:
   machineType: 'N1_HIGHCPU_8'

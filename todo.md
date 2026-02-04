@@ -467,3 +467,30 @@
 - [x] Test database connectivity in production environment
 - [x] Verify all 200 products load correctly in production
 - [x] Document SSH tunnel setup for deployment
+
+## Phase 19: Fix Production Environment Database Connection
+
+### Production Database Access
+- [ ] Investigate production environment database connection error
+- [ ] Check if production server IP can access Digital Ocean MySQL directly
+- [ ] Add production server IP to Digital Ocean firewall whitelist
+- [ ] Test direct MySQL connection from production (without SSH tunnel)
+- [ ] Update CUSTOM_DATABASE_URL for production if needed
+- [ ] Verify all 200 products display on published website
+- [ ] Test all website features in production environment
+
+## Phase 20: Deploy to Google Cloud with Direct MySQL Connection
+
+### Google Cloud Deployment
+- [x] Review and update Dockerfile for production build
+- [x] Configure Cloud Run service with environment variables
+- [x] Update cloudbuild.yaml with CUSTOM_DATABASE_URL
+- [x] Create deployment script (deploy-to-cloud-run.sh)
+- [x] Create comprehensive deployment guide (GOOGLE_CLOUD_DEPLOYMENT.md)
+- [ ] Deploy application to Cloud Run (user action required)
+- [ ] Get Cloud Run service IP address/range
+- [ ] Add Cloud Run IP range to Digital Ocean firewall whitelist
+- [ ] Test database connection from Cloud Run to Digital Ocean MySQL
+- [ ] Verify all 200 products display on Cloud Run URL
+- [ ] Configure custom domain (optional)
+- [ ] Set up Cloud CDN for static assets (optional)
