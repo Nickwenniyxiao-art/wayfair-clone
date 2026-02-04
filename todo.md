@@ -494,3 +494,28 @@
 - [ ] Verify all 200 products display on Cloud Run URL
 - [ ] Configure custom domain (optional)
 - [ ] Set up Cloud CDN for static assets (optional)
+
+## Phase 21: Migrate to Google Cloud SQL and Deploy
+
+### Fix Dockerfile
+- [ ] Remove line 48: COPY --from=builder /app/client/dist ./client/dist
+- [ ] Commit and push Dockerfile fix to GitHub
+
+### Google Cloud SQL Setup
+- [ ] Create Cloud SQL MySQL instance in us-central1
+- [ ] Configure instance settings (machine type, storage)
+- [ ] Set root password and create wayfair database user
+- [ ] Create wayfair_clone database
+- [ ] Configure Cloud SQL connection for Cloud Run
+
+### Data Migration
+- [ ] Export 200 products from Digital Ocean MySQL
+- [ ] Import products data to Cloud SQL
+- [ ] Verify all 200 products imported correctly
+
+### Deployment
+- [ ] Update CUSTOM_DATABASE_URL to Cloud SQL connection string
+- [ ] Trigger Cloud Build to rebuild with fixed Dockerfile
+- [ ] Verify Cloud Run deployment succeeds
+- [ ] Test website and confirm all 200 products display
+- [ ] Configure custom domain (optional)

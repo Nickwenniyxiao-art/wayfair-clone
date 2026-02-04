@@ -50,15 +50,24 @@ async function startServer() {
     serveStatic(app);
   }
 
+  // In production (Cloud Run), must use PORT env var directly
+  // In development, can search for available port
   const preferredPort = parseInt(process.env.PORT || "3000");
-  const port = await findAvailablePort(preferredPort);
-
-  if (port !== preferredPort) {
-    console.log(`Port ${preferredPort} is busy, using port ${port} instead`);
+  let port: number;
+  
+  if (process.env.NODE_ENV === "production") {
+    // Production: use PORT directly, no port scanning
+    port = preferredPort;
+  } else {
+    // Development: find available port
+    port = await findAvailablePort(preferredPort);
+    if (port !== preferredPort) {
+      console.log(`Port ${preferredPort} is busy, using port ${port} instead`);
+    }
   }
 
-  server.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}/`);
+  server.listen(port, '0.0.0.0', () => {
+    console.log(`Server running on http://0.0.0.0:${port}/`);
   });
 }
 
