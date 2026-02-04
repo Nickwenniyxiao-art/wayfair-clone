@@ -15,6 +15,13 @@
       "when": 1770102000459,
       "tag": "0001_happy_sabretooth",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1770182875464,
+      "tag": "0002_watery_valkyrie",
+      "breakpoints": true
     }
   ]
 }

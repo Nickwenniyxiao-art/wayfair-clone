@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "wouter";
 import { ShoppingCart, Search, User, Menu, X } from "lucide-react";
 import { useState } from "react";
-import { getLoginUrl } from "@/const";
+
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./LanguageSwitcher";
 
@@ -92,7 +92,7 @@ export default function Header() {
                 )}
               </div>
             ) : (
-              <Link href={getLoginUrl()}>
+              <Link href="/auth">
                 <Button size="sm" variant="outline">
                   {t("common.signIn")}
                 </Button>

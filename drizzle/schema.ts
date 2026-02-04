@@ -19,9 +19,10 @@ export const users = mysqlTable(
   "users",
   {
     id: int("id").autoincrement().primaryKey(),
-    openId: varchar("openId", { length: 64 }).notNull().unique(),
+    openId: varchar("openId", { length: 64 }).unique(),
     name: text("name"),
-    email: varchar("email", { length: 320 }).unique(),
+    email: varchar("email", { length: 320 }).notNull().unique(),
+    password: varchar("password", { length: 255 }),
     phone: varchar("phone", { length: 20 }),
     avatar: text("avatar"),
     loginMethod: varchar("loginMethod", { length: 64 }),
