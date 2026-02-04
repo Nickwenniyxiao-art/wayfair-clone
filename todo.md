@@ -445,3 +445,25 @@
 - [ ] Test account page navigation
 - [ ] Test order history
 - [ ] Test address management
+
+## Phase 17: Configure Production Environment for Digital Ocean MySQL
+
+### Production Database Connection
+- [ ] Check Digital Ocean MySQL public access settings
+- [ ] Configure firewall rules to allow Manus production servers
+- [ ] Update CUSTOM_DATABASE_URL for production environment
+- [ ] Test database connection from production
+- [ ] Verify all 200 products load in production
+- [ ] Test login/registration functionality in production
+
+## Phase 18: Configure SSH Tunnel for Production MySQL Access
+
+### SSH Tunnel Setup for Production
+- [x] Create SSH key pair for production environment
+- [x] Add public key to Digital Ocean droplet authorized_keys
+- [x] Create SSH tunnel startup script for production
+- [x] Configure autossh for automatic reconnection in production
+- [x] Update production database connection to use localhost:3306 via tunnel
+- [x] Test database connectivity in production environment
+- [x] Verify all 200 products load correctly in production
+- [x] Document SSH tunnel setup for deployment
