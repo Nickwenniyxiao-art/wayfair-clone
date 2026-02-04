@@ -105,3 +105,6 @@ temp/
 *.db
 *.sqlite
 *.sqlite3
+
+# GitHub Personal Access Token (sensitive)
+GITHUB_TOKEN.md
