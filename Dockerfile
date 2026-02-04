@@ -47,11 +47,17 @@ RUN pnpm install --prod --frozen-lockfile
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/drizzle ./drizzle
 
+# Remove vite.js to avoid loading dev dependencies in production
+RUN rm -f ./dist/server/_core/vite.js
+
 # Expose port
 EXPOSE 3000
 
 # Set environment variables
 ENV NODE_ENV=production
+
+# Start the application
+CMD ["node", "dist/index.js"]
 
 # Start the application
 CMD ["node", "dist/index.js"]
