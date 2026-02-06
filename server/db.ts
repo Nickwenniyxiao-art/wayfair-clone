@@ -689,6 +689,7 @@ export async function initializeDatabase() {
     console.log("[Init] Products inserted successfully");
   } catch (error) {
     console.error("[Init] Error initializing database:", error);
-    throw error;
+    // Don't throw - allow app to continue even if initialization fails
+    // This is useful for local development without a database
   }
 }

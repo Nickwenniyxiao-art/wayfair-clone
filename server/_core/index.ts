@@ -6,7 +6,7 @@ import { createExpressMiddleware } from "@trpc/server/adapters/express";
 // OAuth removed - using custom email authentication
 import { appRouter } from "../routers";
 import { createContext } from "./context";
-import { initializeDatabase } from "../db.js";
+import { initializeDatabase } from "../db";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {

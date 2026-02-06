@@ -1,0 +1,60 @@
+{
+  "query": "SELECT id, name, isActive FROM products LIMIT 10;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user bLyctZdt6BpPn58.ebe4cb219154 --database PbV3nytYkm3kr74k7SWNqX --execute SELECT id, name, isActive FROM products LIMIT 10;",
+  "rows": [
+    {
+      "id": "1",
+      "name": "Minimalist White Sofa",
+      "isActive": "1"
+    },
+    {
+      "id": "2",
+      "name": "Natural Oak Dining Table",
+      "isActive": "1"
+    },
+    {
+      "id": "3",
+      "name": "Scandinavian Lounge Chair",
+      "isActive": "1"
+    },
+    {
+      "id": "4",
+      "name": "Minimalist Bookshelf",
+      "isActive": "1"
+    },
+    {
+      "id": "5",
+      "name": "White Marble Coffee Table",
+      "isActive": "1"
+    },
+    {
+      "id": "6",
+      "name": "Abstract Wall Art Print",
+      "isActive": "1"
+    },
+    {
+      "id": "7",
+      "name": "Ceramic Vase Set",
+      "isActive": "1"
+    },
+    {
+      "id": "8",
+      "name": "Wool Area Rug",
+      "isActive": "1"
+    },
+    {
+      "id": "9",
+      "name": "Minimalist Wall Clock",
+      "isActive": "1"
+    },
+    {
+      "id": "10",
+      "name": "Wooden Decorative Boxes",
+      "isActive": "1"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\tisActive\n1\tMinimalist White Sofa\t1\n2\tNatural Oak Dining Table\t1\n3\tScandinavian Lounge Chair\t1\n4\tMinimalist Bookshelf\t1\n5\tWhite Marble Coffee Table\t1\n6\tAbstract Wall Art Print\t1\n7\tCeramic Vase Set\t1\n8\tWool Area Rug\t1\n9\tMinimalist Wall Clock\t1\n10\tWooden Decorative Boxes\t1\n",
+  "stderr": "",
+  "execution_time_ms": 357
+}

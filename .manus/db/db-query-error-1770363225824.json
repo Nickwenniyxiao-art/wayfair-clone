@@ -1,0 +1,8 @@
+{
+  "query": "INSERT INTO categories (name, slug, description, isActive) VALUES\n('Furniture', 'furniture', 'Home furniture and seating', true),\n('Decor', 'decor', 'Home decor and accessories', true),\n('Lighting', 'lighting', 'Lamps and lighting fixtures', true);",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user bLyctZdt6BpPn58.ebe4cb219154 --database PbV3nytYkm3kr74k7SWNqX --execute INSERT INTO categories (name, slug, description, isActive) VALUES\n('Furniture', 'furniture', 'Home furniture and seating', true),\n('Decor', 'decor', 'Home decor and accessories', true),\n('Lighting', 'lighting', 'Lamps and lighting fixtures', true);",
+  "returncode": 1,
+  "logs": [
+    "ERROR 1062 (23000) at line 1: Duplicate entry '?' for key 'categories.categories_name_unique'"
+  ]
+}

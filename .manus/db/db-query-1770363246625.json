@@ -1,0 +1,9 @@
+{
+  "query": "INSERT INTO products (sku, name, slug, description, categoryId, price, stock, rating, reviewCount, isActive) VALUES\n('SKU001', 'Modern Sofa', 'modern-sofa', 'Comfortable modern sofa with sleek design', 1, 599.99, 10, 4.50, 8, true),\n('SKU002', 'Dining Table', 'dining-table', 'Elegant wooden dining table for 6 people', 1, 799.99, 5, 4.80, 12, true),\n('SKU003', 'Wall Art', 'wall-art', 'Abstract wall art print', 2, 49.99, 20, 4.20, 5, true),\n('SKU004', 'LED Lamp', 'led-lamp', 'Modern LED table lamp with adjustable brightness', 3, 89.99, 15, 4.60, 10, true),\n('SKU005', 'Area Rug', 'area-rug', 'Soft wool area rug 5x7', 2, 299.99, 8, 4.40, 7, true);",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user bLyctZdt6BpPn58.ebe4cb219154 --database PbV3nytYkm3kr74k7SWNqX --execute INSERT INTO products (sku, name, slug, description, categoryId, price, stock, rating, reviewCount, isActive) VALUES\n('SKU001', 'Modern Sofa', 'modern-sofa', 'Comfortable modern sofa with sleek design', 1, 599.99, 10, 4.50, 8, true),\n('SKU002', 'Dining Table', 'dining-table', 'Elegant wooden dining table for 6 people', 1, 799.99, 5, 4.80, 12, true),\n('SKU003', 'Wall Art', 'wall-art', 'Abstract wall art print', 2, 49.99, 20, 4.20, 5, true),\n('SKU004', 'LED Lamp', 'led-lamp', 'Modern LED table lamp with adjustable brightness', 3, 89.99, 15, 4.60, 10, true),\n('SKU005', 'Area Rug', 'area-rug', 'Soft wool area rug 5x7', 2, 299.99, 8, 4.40, 7, true);",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 357
+}

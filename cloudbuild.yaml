@@ -35,7 +35,7 @@ images:
   - 'gcr.io/$PROJECT_ID/wayfair-clone:latest'
 
 substitutions:
-  _DATABASE_URL: 'mysql://root:hm|A}ve#"J-P?9Z7@localhost/wayfair_clone?socket=/cloudsql/cohesive-poetry-486213-q3:us-central1:wayfair-mysql'
+  _DATABASE_URL: 'mysql://root:hm|A}ve#"J-P?9Z7@/cloudsql/cohesive-poetry-486213-q3:us-central1:wayfair-mysql/wayfair_clone'
   _JWT_SECRET: 'wayfair-jwt-secret-2024-secure-key-change-in-production'
 
 options:
