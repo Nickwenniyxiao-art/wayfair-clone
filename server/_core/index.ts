@@ -6,6 +6,7 @@ import { createExpressMiddleware } from "@trpc/server/adapters/express";
 // OAuth removed - using custom email authentication
 import { appRouter } from "../routers";
 import { createContext } from "./context";
+import { initializeDatabase } from "../db.js";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -27,6 +28,15 @@ async function findAvailablePort(startPort: number = 3000): Promise<number> {
 }
 
 async function startServer() {
+  // Initialize database with sample data if needed
+  console.log("[Init] Initializing database...");
+  try {
+    await initializeDatabase();
+    console.log("[Init] Database initialized successfully");
+  } catch (error) {
+    console.error("[Init] Error initializing database:", error);
+  }
+
   const app = express();
   const server = createServer(app);
   // Configure body parser with larger size limit for file uploads

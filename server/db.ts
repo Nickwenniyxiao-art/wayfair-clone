@@ -504,3 +504,191 @@ export async function updateProductStock(productId: number, newStock: number) {
     .set({ stock: newStock })
     .where(eq(products.id, productId));
 }
+
+
+/**
+ * Database Initialization
+ */
+export async function initializeDatabase() {
+  const db = await getDb();
+  if (!db) {
+    console.log("[Init] Database not available, skipping initialization");
+    return;
+  }
+
+  try {
+    // Check if categories already exist
+    const existingCategories = await db.select().from(categories).limit(1);
+    if (existingCategories.length > 0) {
+      console.log("[Init] Database already initialized with data");
+      return;
+    }
+
+    console.log("[Init] Seeding database with sample data...");
+
+    // Insert categories
+    const categoryInserts = [
+      {
+        name: "Furniture",
+        slug: "furniture",
+        description: "Home furniture and pieces",
+        displayOrder: 1,
+        isActive: true,
+      },
+      {
+        name: "Decor",
+        slug: "decor",
+        description: "Home decoration items",
+        displayOrder: 2,
+        isActive: true,
+      },
+      {
+        name: "Lighting",
+        slug: "lighting",
+        description: "Lighting fixtures and lamps",
+        displayOrder: 3,
+        isActive: true,
+      },
+    ];
+
+    const insertedCategories = await db.insert(categories).values(categoryInserts);
+    console.log("[Init] Categories inserted");
+
+    // Get category IDs
+    const allCategories = await db.select().from(categories);
+    const categoryMap: Record<string, number> = {};
+    allCategories.forEach((cat) => {
+      categoryMap[cat.slug] = cat.id;
+    });
+
+    // Insert products
+    const productInserts = [
+      {
+        sku: "SOFA-001",
+        name: "Modern Grey Sofa",
+        slug: "modern-grey-sofa",
+        description: "Comfortable 3-seater modern grey sofa perfect for any living room",
+        categoryId: categoryMap["furniture"],
+        price: "599.99",
+        originalPrice: "799.99",
+        stock: 15,
+        rating: "4.5",
+        reviewCount: 42,
+        isFeatured: true,
+        isActive: true,
+        images: JSON.stringify(["https://via.placeholder.com/400x300?text=Grey+Sofa"]),
+      },
+      {
+        sku: "CHAIR-001",
+        name: "Leather Accent Chair",
+        slug: "leather-accent-chair",
+        description: "Premium leather accent chair with wooden legs",
+        categoryId: categoryMap["furniture"],
+        price: "349.99",
+        originalPrice: "449.99",
+        stock: 20,
+        rating: "4.8",
+        reviewCount: 28,
+        isFeatured: true,
+        isActive: true,
+        images: JSON.stringify(["https://via.placeholder.com/400x300?text=Leather+Chair"]),
+      },
+      {
+        sku: "TABLE-001",
+        name: "Wooden Coffee Table",
+        slug: "wooden-coffee-table",
+        description: "Beautiful wooden coffee table with storage",
+        categoryId: categoryMap["furniture"],
+        price: "199.99",
+        originalPrice: "299.99",
+        stock: 25,
+        rating: "4.3",
+        reviewCount: 15,
+        isFeatured: false,
+        isActive: true,
+        images: JSON.stringify(["https://via.placeholder.com/400x300?text=Coffee+Table"]),
+      },
+      {
+        sku: "LAMP-001",
+        name: "Modern Floor Lamp",
+        slug: "modern-floor-lamp",
+        description: "Sleek modern floor lamp with adjustable brightness",
+        categoryId: categoryMap["lighting"],
+        price: "89.99",
+        originalPrice: "129.99",
+        stock: 30,
+        rating: "4.6",
+        reviewCount: 52,
+        isFeatured: true,
+        isActive: true,
+        images: JSON.stringify(["https://via.placeholder.com/400x300?text=Floor+Lamp"]),
+      },
+      {
+        sku: "LAMP-002",
+        name: "Pendant Light Fixture",
+        slug: "pendant-light-fixture",
+        description: "Contemporary pendant light with warm glow",
+        categoryId: categoryMap["lighting"],
+        price: "129.99",
+        originalPrice: "179.99",
+        stock: 18,
+        rating: "4.7",
+        reviewCount: 33,
+        isFeatured: false,
+        isActive: true,
+        images: JSON.stringify(["https://via.placeholder.com/400x300?text=Pendant+Light"]),
+      },
+      {
+        sku: "DECOR-001",
+        name: "Wall Art Canvas",
+        slug: "wall-art-canvas",
+        description: "Abstract wall art canvas print for modern homes",
+        categoryId: categoryMap["decor"],
+        price: "79.99",
+        originalPrice: "119.99",
+        stock: 40,
+        rating: "4.4",
+        reviewCount: 21,
+        isFeatured: true,
+        isActive: true,
+        images: JSON.stringify(["https://via.placeholder.com/400x300?text=Wall+Art"]),
+      },
+      {
+        sku: "DECOR-002",
+        name: "Decorative Throw Pillow",
+        slug: "decorative-throw-pillow",
+        description: "Soft and comfortable throw pillow with modern design",
+        categoryId: categoryMap["decor"],
+        price: "34.99",
+        originalPrice: "49.99",
+        stock: 50,
+        rating: "4.5",
+        reviewCount: 67,
+        isFeatured: false,
+        isActive: true,
+        images: JSON.stringify(["https://via.placeholder.com/400x300?text=Throw+Pillow"]),
+      },
+      {
+        sku: "DECOR-003",
+        name: "Ceramic Vase",
+        slug: "ceramic-vase",
+        description: "Elegant ceramic vase for flowers and decoration",
+        categoryId: categoryMap["decor"],
+        price: "59.99",
+        originalPrice: "89.99",
+        stock: 35,
+        rating: "4.2",
+        reviewCount: 18,
+        isFeatured: false,
+        isActive: true,
+        images: JSON.stringify(["https://via.placeholder.com/400x300?text=Ceramic+Vase"]),
+      },
+    ];
+
+    await db.insert(products).values(productInserts as any);
+    console.log("[Init] Products inserted successfully");
+  } catch (error) {
+    console.error("[Init] Error initializing database:", error);
+    throw error;
+  }
+}
