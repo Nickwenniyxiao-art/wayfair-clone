@@ -10,9 +10,6 @@ COPY package.json pnpm-lock.yaml ./
 RUN mkdir -p patches
 COPY patches/ patches/
 
-# Debug: List files to verify patches folder
-RUN echo "=== Listing /app contents ===" && ls -la /app && echo "=== Listing /app/patches contents ===" && ls -la /app/patches || echo "patches folder not found!"
-
 # Install dependencies
 RUN npm install -g pnpm && pnpm install --frozen-lockfile
 
@@ -37,18 +34,16 @@ COPY package.json pnpm-lock.yaml ./
 RUN mkdir -p patches
 COPY patches/ patches/
 
-# Debug: List files to verify patches folder
-RUN echo "=== Listing /app contents (production) ===" && ls -la /app && echo "=== Listing /app/patches contents (production) ===" && ls -la /app/patches || echo "patches folder not found!"
-
-# Install production dependencies only
-RUN pnpm install --prod --frozen-lockfile
+# Install all dependencies (some devDependencies like @builder.io/vite-plugin-jsx-loc
+# are referenced in the built dist/index.js and required at runtime)
+RUN pnpm install --frozen-lockfile
 
 # Copy built application from builder
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/drizzle ./drizzle
 
-# Expose port
-EXPOSE 3000
+# Expose port (Cloud Run uses PORT env var, defaults to 8080)
+EXPOSE 8080
 
 # Set environment variables
 ENV NODE_ENV=production
