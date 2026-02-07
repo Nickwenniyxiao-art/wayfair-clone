@@ -708,7 +708,11 @@ export async function seedCategories(): Promise<void> {
   ];
 
   for (const category of sampleCategories) {
-    await db.insert(categories).values(category).onDuplicateKeyUpdate({ set: { name: category.name } });
+    // Check if category already exists
+    const existing = await db.select().from(categories).where(eq(categories.slug, category.slug)).limit(1);
+    if (existing.length === 0) {
+      await db.insert(categories).values(category);
+    }
   }
 }
 
@@ -949,6 +953,10 @@ export async function seedProducts(): Promise<void> {
   ];
 
   for (const product of sampleProducts) {
-    await db.insert(products).values(product).onDuplicateKeyUpdate({ set: { name: product.name } });
+    // Check if product already exists
+    const existing = await db.select().from(products).where(eq(products.sku, product.sku)).limit(1);
+    if (existing.length === 0) {
+      await db.insert(products).values(product);
+    }
   }
 }
