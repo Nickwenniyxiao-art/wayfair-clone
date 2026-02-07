@@ -50,6 +50,14 @@ const productRouter = router({
   categories: publicProcedure.query(async () => {
     return await db.getCategories();
   }),
+
+  seed: publicProcedure.mutation(async () => {
+    // Insert sample categories
+    await db.seedCategories();
+    // Insert sample products
+    await db.seedProducts();
+    return { success: true, message: "Sample data inserted successfully" };
+  }),
 });
 
 /**
