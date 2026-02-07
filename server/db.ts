@@ -708,10 +708,11 @@ export async function seedCategories(): Promise<void> {
   ];
 
   for (const category of sampleCategories) {
-    // Check if category already exists
-    const existing = await db.select().from(categories).where(eq(categories.slug, category.slug)).limit(1);
-    if (existing.length === 0) {
+    try {
       await db.insert(categories).values(category);
+    } catch (error) {
+      // Ignore duplicate key errors
+      console.log(`Category ${category.slug} already exists, skipping`);
     }
   }
 }
@@ -953,10 +954,11 @@ export async function seedProducts(): Promise<void> {
   ];
 
   for (const product of sampleProducts) {
-    // Check if product already exists
-    const existing = await db.select().from(products).where(eq(products.sku, product.sku)).limit(1);
-    if (existing.length === 0) {
+    try {
       await db.insert(products).values(product);
+    } catch (error) {
+      // Ignore duplicate key errors
+      console.log(`Product ${product.sku} already exists, skipping`);
     }
   }
 }
